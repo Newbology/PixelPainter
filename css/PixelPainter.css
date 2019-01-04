@@ -1,0 +1,82 @@
+/* create grid for colors to go into
+define the size of the grid
+ */
+/* * {
+  box-sizing: border-box;
+} */
+body {
+  background: whitesmoke;
+}
+h1 {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+#pixelPainter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#grid,
+#swatch {
+  display: flex;
+  width: 630px;
+  height: 546px;
+  border: 1px solid transparent;
+  justify-content: center;
+}
+
+/* .column {
+  width: 100%;
+  height: 100%;
+} */
+.pixel {
+  height: 40px;
+  width: 40px;
+  border: 1px solid black;
+}
+
+#swatch:hover {
+  cursor: pointer;
+}
+#tools {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border-radius: 0px;
+  margin: 5px;
+}
+.clear {
+  width: 80px;
+  height: 36px;
+  text-align: center;
+  padding: 3px 3px 3px 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+.clear:hover {
+  cursor: pointer;
+  background: rgb(192, 157, 248);
+}
+.clear:active {
+  background: black;
+  color: white;
+}
+.eraser {
+  height: 36px;
+  width: 80px;
+  text-align: center;
+  padding: 3px 3px 3px 3px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-right: 5px;
+}
+.eraser:hover {
+  cursor: pointer;
+  background: rgb(192, 157, 248);
+}
+.eraser:active {
+  background: black;
+  color: white;
+}
