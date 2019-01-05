@@ -92,6 +92,7 @@ h1 {
   border: 1px solid transparent;
   border-radius: 25px;
   width: 800px;
+  height: 100px;
   margin: auto;
   background-color: grey;
   box-shadow: 3px 3px 15px #ff0000, -3px -3px 15px red;
@@ -109,10 +110,15 @@ h1 {
 #grid,
 #swatch {
   display: flex;
-  width: 630px;
-  height: 546px;
+  width: 430px;
+  height: 470px;
   border: 1px solid transparent;
   justify-content: center;
+}
+#grid {
+  border: 5px solid black;
+  width: 473px;
+  height: 473px;
 }
 #swatch {
   margin: 10px;

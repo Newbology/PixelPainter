@@ -10,20 +10,6 @@ const pixelPainter = (function() {
     mouseDown = false;
   };
 
-  //create color pallet for swatch
-  const colorPallet = [
-    "red",
-    "blue",
-    "yellow",
-    "green",
-    "orange",
-    "brown",
-    "aqua",
-    "black",
-    "purple",
-    "white"
-  ];
-
   //creating grid/pixel function
   let createGrid = (height, width) => {
     let grid = document.createElement("div");
@@ -41,9 +27,10 @@ const pixelPainter = (function() {
     }
     return grid;
   };
+
   //invoking function to create grid/pixels
   const swatch = createGrid(5, 2);
-  const mainGrid = createGrid(31, 31);
+  const mainGrid = createGrid(27, 27);
 
   //grabbing main container holding
   const wrapper = document.getElementById("pixelPainter");
@@ -58,39 +45,68 @@ const pixelPainter = (function() {
   eraser.className = "eraser";
   eraser.innerHTML = "ERASER";
   tools.appendChild(eraser);
+  eraser.addEventListener("click", erasePixels);
 
   //create color wheel button element, appended to swatch color selector
   let colorWheel = document.createElement("input");
   colorWheel.className = "colorwheel";
   colorWheel.type = "color";
   swatch.appendChild(colorWheel);
+  colorWheel.addEventListener("input", colorPicked);
 
   //create clear button element, append to tools container
   const clear = document.createElement("div");
   clear.className = "clear";
   clear.innerHTML = "CLEAR";
   tools.appendChild(clear);
+  clear.addEventListener("click", clearPixels);
 
   //Create save button element, append to tools container
   const save = document.createElement("div");
   save.className = "save";
   save.innerHTML = "SAVE";
   tools.appendChild(save);
+  save.addEventListener("click", savePixels);
 
   //create load button element, append to tools conatiner
   const load = document.createElement("div");
   load.className = "load";
   load.innerHTML = "LOAD";
   tools.appendChild(load);
+  load.addEventListener("click", loadSavedPixels);
 
   //appending pixel grid and swatch to main wrapper-pixelpainter
   wrapper.appendChild(mainGrid);
   wrapper.appendChild(swatch);
 
-  //empty variables to hold data
+  //set swatch id to "swatch"
+  swatch.id = "swatch";
+
+  //grabbing elements to identify them
+  const grid = document.getElementById("grid");
+  const swatchpixel = swatch.getElementsByClassName("pixel");
+  const getPixels = document.getElementsByClassName("pixel");
+  const colorPixels = grid.getElementsByClassName("pixel");
+
+  //empty variables to hold data\\
   let activeColor = ""; //used to change colors on swatch
   let saveButton = []; //used to save and load array data
 
+  //create color pallet for swatch
+  const colorPallet = [
+    "red",
+    "blue",
+    "yellow",
+    "green",
+    "orange",
+    "brown",
+    "aqua",
+    "black",
+    "purple",
+    "white"
+  ];
+
+  // functions \\
   //select a color from the color swatch
   function colorChoice() {
     activeColor = this.style.backgroundColor;
@@ -124,45 +140,35 @@ const pixelPainter = (function() {
   function erasePixels() {
     activeColor = "white";
   }
+
   //reset all the pixels back to white
   function clearPixels() {
     for (var i = 0; i < getPixels.length; i++) {
       getPixels[i].style.backgroundColor = "white";
     }
-    //change background color to grid
+
+    //add colors back to swatch
     for (var i = 0; i < colorPallet.length; i++) {
       swatchpixel[i].style.backgroundColor = colorPallet[i];
     }
   }
+
   //pick color from wheel
   function colorPicked() {
     activeColor = this.value;
   }
-
-  //grabbing elements to identify them
-  const grid = document.getElementById("grid");
-  const swatchpixel = swatch.getElementsByClassName("pixel");
-  const getPixels = document.getElementsByClassName("pixel");
-  const colorPixels = grid.getElementsByClassName("pixel");
 
   //creating event listener to paint 1 pixel
   for (var i = 0; i < colorPallet.length; i++) {
     swatchpixel[i].addEventListener("click", colorChoice);
     swatchpixel[i].style.backgroundColor = colorPallet[i];
   }
+
   //creating event listener to paint multiple pixels
   for (var i = 0; i < colorPixels.length; i++) {
     colorPixels[i].addEventListener("click", paintPixels);
     colorPixels[i].addEventListener("mouseover", paintManyPixels);
   }
-  //adding event listeners
-  eraser.addEventListener("click", erasePixels);
-  clear.addEventListener("click", clearPixels);
-  save.addEventListener("click", savePixels);
-  load.addEventListener("click", loadSavedPixels);
-  colorWheel.addEventListener("input", colorPicked);
-  //set swatch id to "swatch"
-  swatch.id = "swatch";
 })();
 
 //used to mess with color wheel, ignore
