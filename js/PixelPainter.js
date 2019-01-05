@@ -36,6 +36,7 @@ const pixelPainter = (function() {
       for (var x = 0; x < width; x++) {
         let pixel = document.createElement("div");
         pixel.className = "pixel";
+        pixel.style.backgroundColor = "white";
         column.appendChild(pixel);
       }
       grid.appendChild(column);
@@ -61,15 +62,28 @@ const pixelPainter = (function() {
   clear.innerHTML = "CLEAR";
   tools.appendChild(clear);
 
+  const save = document.createElement("div");
+  save.className = "save";
+  save.innerHTML = "SAVE";
+  tools.appendChild(save);
+
+  const load = document.createElement("div");
+  load.className = "load";
+  load.innerHTML = "LOAD";
+  tools.appendChild(load);
+
   wrapper.appendChild(mainGrid);
   wrapper.appendChild(swatch);
 
   let activeColor = "";
+  let saveButton = [];
 
   function colorChoice() {
     activeColor = this.style.backgroundColor;
   }
+  // function savePixels(){
 
+  // }
   function paintPixels() {
     this.style.backgroundColor = activeColor;
   }
@@ -81,12 +95,12 @@ const pixelPainter = (function() {
   }
 
   function erasePixels() {
-    activeColor = "transparent";
+    activeColor = "white";
   }
 
   function clearPixels() {
     for (var i = 0; i < getPixels.length; i++) {
-      getPixels[i].style.backgroundColor = "transparent";
+      getPixels[i].style.backgroundColor = "white";
     }
     for (var i = 0; i < colorPallet.length; i++) {
       swatchpixel[i].style.backgroundColor = colorPallet[i];
