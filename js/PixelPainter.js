@@ -1,11 +1,6 @@
-/*click to add color
-click hold to add color
-create eraser button
-create a clear button 
-create grid
-create color swatch ---add functionality 
-set background color as active color
-*/
+//add comments to tell people what this shit does you lazy fuck.
+
+//indicates wether mouse is clicked down or up.
 const pixelPainter = (function() {
   var mouseDown = 0;
   document.body.onmousedown = function() {
@@ -14,19 +9,22 @@ const pixelPainter = (function() {
   document.body.onmouseup = function() {
     mouseDown = false;
   };
+
+  //create color pallet for swatch
   const colorPallet = [
     "red",
     "blue",
     "yellow",
     "green",
     "orange",
-    "lime",
+    "brown",
     "aqua",
     "black",
     "purple",
     "white"
   ];
 
+  //creating grid/pixel function
   let createGrid = (height, width) => {
     let grid = document.createElement("div");
     grid.id = "grid";
@@ -43,87 +41,133 @@ const pixelPainter = (function() {
     }
     return grid;
   };
-
+  //invoking function to create grid/pixels
   const swatch = createGrid(5, 2);
-  const mainGrid = createGrid(15, 13);
+  const mainGrid = createGrid(31, 31);
 
+  //grabbing main container holding
   const wrapper = document.getElementById("pixelPainter");
+
+  //create tools container, append to main wrapper-pixelpainter
   const tools = document.createElement("div");
   tools.id = "tools";
   wrapper.appendChild(tools);
 
+  //create eraser button, append to tools container
   const eraser = document.createElement("div");
   eraser.className = "eraser";
   eraser.innerHTML = "ERASER";
   tools.appendChild(eraser);
 
+  //create color wheel button element, appended to swatch color selector
+  let colorWheel = document.createElement("input");
+  colorWheel.className = "colorwheel";
+  colorWheel.type = "color";
+  swatch.appendChild(colorWheel);
+
+  //create clear button element, append to tools container
   const clear = document.createElement("div");
   clear.className = "clear";
   clear.innerHTML = "CLEAR";
   tools.appendChild(clear);
 
+  //Create save button element, append to tools container
   const save = document.createElement("div");
   save.className = "save";
   save.innerHTML = "SAVE";
   tools.appendChild(save);
 
+  //create load button element, append to tools conatiner
   const load = document.createElement("div");
   load.className = "load";
   load.innerHTML = "LOAD";
   tools.appendChild(load);
 
+  //appending pixel grid and swatch to main wrapper-pixelpainter
   wrapper.appendChild(mainGrid);
   wrapper.appendChild(swatch);
 
-  let activeColor = "";
-  let saveButton = [];
+  //empty variables to hold data
+  let activeColor = ""; //used to change colors on swatch
+  let saveButton = []; //used to save and load array data
 
+  //select a color from the color swatch
   function colorChoice() {
     activeColor = this.style.backgroundColor;
   }
-  // function savePixels(){
 
-  // }
+  //save the pixels color data into an array
+  function savePixels() {
+    saveButton = [];
+    for (var i = 0; i < getPixels.length; i++) {
+      getPixels[i].style.backgroundColor;
+      saveButton.push(getPixels[i].style.backgroundColor);
+    }
+  }
+  //load the pixels color data onto painter
+  function loadSavedPixels() {
+    for (var i = 0; i < getPixels.length; i++) {
+      getPixels[i].style.backgroundColor = saveButton[i];
+    }
+  }
+  //changes pixel colors 1 at a time
   function paintPixels() {
     this.style.backgroundColor = activeColor;
   }
-
+  //click and hold to paint many pixels
   function paintManyPixels() {
     if (mouseDown) {
       this.style.backgroundColor = activeColor;
     }
   }
-
+  //erase pixels on array
   function erasePixels() {
     activeColor = "white";
   }
-
+  //reset all the pixels back to white
   function clearPixels() {
     for (var i = 0; i < getPixels.length; i++) {
       getPixels[i].style.backgroundColor = "white";
     }
+    //change background color to grid
     for (var i = 0; i < colorPallet.length; i++) {
       swatchpixel[i].style.backgroundColor = colorPallet[i];
     }
   }
+  //pick color from wheel
+  function colorPicked() {
+    activeColor = this.value;
+  }
 
-  let grid = document.getElementById("grid");
-  let swatchpixel = swatch.getElementsByClassName("pixel");
-  let getPixels = document.getElementsByClassName("pixel");
-  let colorPixels = grid.getElementsByClassName("pixel");
+  //grabbing elements to identify them
+  const grid = document.getElementById("grid");
+  const swatchpixel = swatch.getElementsByClassName("pixel");
+  const getPixels = document.getElementsByClassName("pixel");
+  const colorPixels = grid.getElementsByClassName("pixel");
 
+  //creating event listener to paint 1 pixel
   for (var i = 0; i < colorPallet.length; i++) {
     swatchpixel[i].addEventListener("click", colorChoice);
     swatchpixel[i].style.backgroundColor = colorPallet[i];
   }
-
+  //creating event listener to paint multiple pixels
   for (var i = 0; i < colorPixels.length; i++) {
     colorPixels[i].addEventListener("click", paintPixels);
     colorPixels[i].addEventListener("mouseover", paintManyPixels);
   }
-
+  //adding event listeners
   eraser.addEventListener("click", erasePixels);
   clear.addEventListener("click", clearPixels);
-
+  save.addEventListener("click", savePixels);
+  load.addEventListener("click", loadSavedPixels);
+  colorWheel.addEventListener("input", colorPicked);
+  //set swatch id to "swatch"
   swatch.id = "swatch";
 })();
+
+//used to mess with color wheel, ignore
+// let colorWheelWrapper = document.createElement("label");
+// colorWheelWrapper.id = "wheelWrapper";
+// colorWheelWrapper.type = "label";
+// colorWheelWrapper.innerHTML = "wheel";
+// swatch.appendChild(colorWheelWrapper);

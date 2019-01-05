@@ -1,15 +1,90 @@
-/* create grid for colors to go into
-define the size of the grid
- */
-/* * {
-  box-sizing: border-box;
-} */
-/* body {
-   background: whitesmoke;
-  border: 1px solid black; 
-  width: 75%;
-  height: 80%;
-} */
+/* @media only screen and (max-width: 768px) {
+}
+@media only screen and (max-width: 768px) {
+  h1 {
+    display: flex;
+    justify-content: center;
+    font-size: 500%;
+    border: 1px solid transparent;
+    border-radius: 25px;
+    width: 80%;
+    margin: auto;
+    background-color: grey;
+    box-shadow: 3px 3px 15px #ff0000, -3px -3px 15px red;
+    text-shadow: -1px 1.3px red;
+  }
+  #pixelPainter {
+    border: 5px solid black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: red;
+    margin: 15px auto;
+    width: 600px;
+  }
+  #grid,
+  #swatch {
+    display: flex;
+    width: 600px;
+    height: 446px;
+    border: 1px solid transparent;
+    justify-content: center;
+  }
+  #swatch {
+    margin: 10px;
+    border: 1px solid black;
+    width: 210px;
+    height: 83px;
+  }
+
+  .pixel {
+    height: 30px;
+    width: 30px;
+    border: 1px solid black;
+  }
+  #grid:hover {
+    cursor: crosshair;
+  }
+  #swatch:hover {
+    cursor: pointer;
+  }
+  #tools {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    border-radius: 0px;
+    margin: 5px;
+  }
+
+  .save:hover,
+  .clear:hover,
+  .eraser:hover,
+  .load:hover {
+    cursor: pointer;
+    background: whitesmoke;
+  }
+  .clear:active,
+  .save:active,
+  .eraser:active,
+  .load:active {
+    background: black;
+    color: white;
+  }
+  .eraser,
+  .save,
+  .clear,
+  .load {
+    height: 25px;
+    width: 80px;
+
+    padding: 3px 3px 3px 3px;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin-right: 5px;
+    background-color: rgba(233, 204, 39, 0.733);
+    text-align: center;
+  }
+ } */
 h1 {
   display: flex;
   justify-content: center;
@@ -42,21 +117,55 @@ h1 {
 #swatch {
   margin: 10px;
   border: 1px solid black;
-  width: 210px;
-  height: 83px;
+  width: 230px;
+  height: 84px;
 }
 
 .pixel {
-  height: 40px;
-  width: 40px;
-  border: 1px solid black;
+  height: 17.5px;
+  width: 17.5px;
+
+  border: 0.02px solid black;
 }
+#swatch .pixel {
+  height: 42px;
+  width: 42px;
+}
+input[type="color"] {
+  width: 40px;
+  height: 84px;
+  border: none;
+  background: none;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: solid 1px #000;
+}
+/*.inputcolorWheel {
+  height: 85px;
+  overflow: hidden;
+  outline: none;
+  box-shadow: none;
+  border-color: inherit;
+  border-color: transparent; 
+}
+#wheelWrapper {
+  color: white;
+  background-color: black;
+  height: 83px;
+  width: 20px;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+} */
 #grid:hover {
   cursor: crosshair;
 }
 #swatch:hover {
   cursor: pointer;
 }
+
 #tools {
   display: flex;
   justify-content: space-between;
@@ -93,21 +202,3 @@ h1 {
   background-color: rgba(233, 204, 39, 0.733);
   text-align: center;
 }
-
-/* .eraser:hover {
-  cursor: pointer;
-  background: rgb(192, 157, 248);
-} */
-/* .eraser:active {
-  background: black;
-  color: white;
-} */
-/* .clear {
-  width: 80px;
-  height: 36px;
-  text-align: center;
-  padding: 3px 3px 3px 3px;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-left: 5px;
-} */
